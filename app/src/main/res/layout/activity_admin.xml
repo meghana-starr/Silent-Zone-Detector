@@ -1,42 +1,35 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edtLatitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/etLatitude"
         android:hint="Latitude"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/edtLongitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/etLongitude"
         android:hint="Longitude"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/edtRadius"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/etRadius"
         android:hint="Radius (meters)"
-        android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/edtAddress"
+        android:inputType="numberDecimal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        android:inputType="text" />
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnSaveZone"
-        android:layout_width="match_parent"
+        android:id="@+id/btnSave"
+        android:text="Save Zone"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Zone" />
-
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

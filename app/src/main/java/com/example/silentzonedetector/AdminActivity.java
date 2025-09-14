@@ -1,62 +1,70 @@
 package com.example.silentzonedetector;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private EditText edtLatitude, edtLongitude, edtRadius, edtAddress;
-    private Button btnSaveZone;
-    private DatabaseHelper dbHelper;
+    EditText etLatitude, etLongitude, etRadius;
+    Button btnSave;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        etLatitude = findViewById(R.id.etLatitude);
+        etLongitude = findViewById(R.id.etLongitude);
+        etRadius = findViewById(R.id.etRadius);
+        btnSave = findViewById(R.id.btnSave);
+
         dbHelper = new DatabaseHelper(this);
 
-        edtLatitude = findViewById(R.id.edtLatitude);
-        edtLongitude = findViewById(R.id.edtLongitude);
-        edtRadius = findViewById(R.id.edtRadius);
-        edtAddress = findViewById(R.id.edtAddress);
-        btnSaveZone = findViewById(R.id.btnSaveZone);
-
-        btnSaveZone.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String latStr = edtLatitude.getText().toString();
-                String lonStr = edtLongitude.getText().toString();
-                String radiusStr = edtRadius.getText().toString();
-                String address = edtAddress.getText().toString();  // <- added
-
-                // Validate input
-                if (latStr.isEmpty() || lonStr.isEmpty() || radiusStr.isEmpty() || address.isEmpty()) {
-                    Toast.makeText(AdminActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                double lat = Double.parseDouble(latStr);
-                double lon = Double.parseDouble(lonStr);
-                float radius = Float.parseFloat(radiusStr);
-
-                boolean inserted = dbHelper.addZone(lat, lon, radius, address); // <- include address
-
-                if (inserted) {
-                    Toast.makeText(AdminActivity.this, "Zone saved successfully", Toast.LENGTH_SHORT).show();
-                    edtLatitude.setText("");
-                    edtLongitude.setText("");
-                    edtRadius.setText("");
-                    edtAddress.setText("");
-                } else {
-                    Toast.makeText(AdminActivity.this, "Failed to save zone", Toast.LENGTH_SHORT).show();
-                }
+            public void onClick(View view) {
+                saveZone();
             }
         });
+    }
+
+    private void saveZone() {
+        String latStr = etLatitude.getText().toString().trim();
+        String lonStr = etLongitude.getText().toString().trim();
+        String radStr = etRadius.getText().toString().trim();
+
+        if(latStr.isEmpty() || lonStr.isEmpty() || radStr.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double latitude = Double.parseDouble(latStr);
+        double longitude = Double.parseDouble(lonStr);
+        float radius = Float.parseFloat(radStr);
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COL_LAT, latitude);
+        values.put(DatabaseHelper.COL_LON, longitude);
+        values.put(DatabaseHelper.COL_RADIUS, radius);
+
+        long id = db.insert(DatabaseHelper.TABLE_NAME, null, values);
+        if(id != -1) {
+            Toast.makeText(this, "Zone saved successfully", Toast.LENGTH_SHORT).show();
+            etLatitude.setText("");
+            etLongitude.setText("");
+            etRadius.setText("");
+        } else {
+            Toast.makeText(this, "Error saving zone", Toast.LENGTH_SHORT).show();
+        }
+
+        db.close();
     }
 }
