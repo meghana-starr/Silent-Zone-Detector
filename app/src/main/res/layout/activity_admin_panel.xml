@@ -4,21 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnAdminPanel"
+    <EditText
+        android:id="@+id/etAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admin Panel" />
+        android:hint="Address" />
+
+    <EditText
+        android:id="@+id/etRad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Radius (meters)"
+        android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/btnStartDetector"
+        android:id="@+id/btnSaveZone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Detector" />
-
-    <Button
-        android:id="@+id/btnStopDetector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stop Detector" />
+        android:text="Save Zone" />
 </LinearLayout>

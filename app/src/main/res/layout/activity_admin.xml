@@ -1,35 +1,42 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/etLatitude"
+        android:id="@+id/edtLatitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Latitude"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:inputType="numberDecimal" />
 
     <EditText
-        android:id="@+id/etLongitude"
+        android:id="@+id/edtLongitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Longitude"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:inputType="numberDecimal" />
 
     <EditText
-        android:id="@+id/etRadius"
-        android:hint="Radius (meters)"
-        android:inputType="numberDecimal"
+        android:id="@+id/edtRadius"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Radius (meters)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/edtAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/btnSave"
-        android:text="Save Zone"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnSaveZone"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
+        android:text="Save Zone" />
+
 </LinearLayout>
